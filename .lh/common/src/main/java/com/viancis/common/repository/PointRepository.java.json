@@ -1,0 +1,22 @@
+{
+    "sourceFile": "common/src/main/java/com/viancis/common/repository/PointRepository.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754246230204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754250213919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,11 +12,9 @@\n \n @Repository\n public interface PointRepository extends JpaRepository<Point, String> {\n     List<Point> findAllByUserId(UUID userId);\n-    \n-    List<Point> findByUserId(UUID userId);\n \n-    @Query(\"SELECT p FROM Point p WHERE p.userId NOT IN :userIds\")\n+    @Query(\"SELECT p FROM Point p WHERE p.user.id NOT IN :userIds\")\n     List<Point> findPointsForUsers(@Param(\"userIds\") Set<UUID> userIds);\n \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1754246230204,
+            "name": "Commit-0",
+            "content": "package com.viancis.common.repository;\n\nimport com.viancis.common.model.Point;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\nimport org.springframework.stereotype.Repository;\n\nimport java.util.List;\nimport java.util.Set;\nimport java.util.UUID;\n\n@Repository\npublic interface PointRepository extends JpaRepository<Point, String> {\n    List<Point> findAllByUserId(UUID userId);\n    \n    List<Point> findByUserId(UUID userId);\n\n    @Query(\"SELECT p FROM Point p WHERE p.userId NOT IN :userIds\")\n    List<Point> findPointsForUsers(@Param(\"userIds\") Set<UUID> userIds);\n\n}"
+        }
+    ]
+}

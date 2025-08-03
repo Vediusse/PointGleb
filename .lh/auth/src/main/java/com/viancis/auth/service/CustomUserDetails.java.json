@@ -1,0 +1,22 @@
+{
+    "sourceFile": "auth/src/main/java/com/viancis/auth/service/CustomUserDetails.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754244998850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754250213950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n import com.viancis.auth.model.Role;\n import com.viancis.auth.model.User;\n import lombok.Getter;\n+import lombok.Setter;\n import org.springframework.security.core.GrantedAuthority;\n import org.springframework.security.core.authority.SimpleGrantedAuthority;\n import org.springframework.security.core.userdetails.UserDetails;\n \n"
+                }
+            ],
+            "date": 1754244998850,
+            "name": "Commit-0",
+            "content": "package com.viancis.auth.service;\n\nimport com.viancis.auth.model.Role;\nimport com.viancis.auth.model.User;\nimport lombok.Getter;\nimport org.springframework.security.core.GrantedAuthority;\nimport org.springframework.security.core.authority.SimpleGrantedAuthority;\nimport org.springframework.security.core.userdetails.UserDetails;\n\nimport java.io.Serializable;\nimport java.util.Collection;\nimport java.util.Set;\nimport java.util.UUID;\nimport java.util.stream.Collectors;\n\n@Getter\n\npublic class CustomUserDetails implements UserDetails, Serializable {\n\n    private User user;\n\n\n    private final Collection<? extends GrantedAuthority> authorities;\n    private final String password;\n\n    public CustomUserDetails(User user) {\n        this.user = user;\n        this.password = user.getPassword();\n        this.authorities = user.getRoles().stream()\n                .map(Role::getAuthority)\n                .map(SimpleGrantedAuthority::new)\n                .collect(Collectors.toSet());\n    }\n\n\n    public CustomUserDetails(UUID id, String username, Set<String> roles) {\n        this.user = new User(id,username,\"\",roles.stream().map(Role::fromString).collect(Collectors.toSet()));\n        this.password = user.getPassword();\n        this.authorities = roles.stream()\n                .map(SimpleGrantedAuthority::new)\n                .collect(Collectors.toSet());\n    }\n\n\n    @Override\n    public Collection<? extends GrantedAuthority> getAuthorities() {\n        return authorities;\n    }\n\n    @Override\n    public String getPassword() {\n        return password;\n    }\n\n    @Override\n    public String getUsername() {\n        return user.getUsername();\n    }\n\n    @Override\n    public boolean isAccountNonExpired() {\n        return true; // Установите по необходимости\n    }\n\n    @Override\n    public boolean isAccountNonLocked() {\n        return true; // Установите по необходимости\n    }\n\n    @Override\n    public boolean isCredentialsNonExpired() {\n        return true; // Установите по необходимости\n    }\n\n    @Override\n    public boolean isEnabled() {\n        return true; // Установите по необходимости\n    }\n\n} "
+        }
+    ]
+}

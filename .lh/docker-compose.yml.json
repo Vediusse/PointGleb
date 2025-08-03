@@ -1,0 +1,22 @@
+{
+    "sourceFile": "docker-compose.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754144834461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754147481790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n     environment:\n       RABBITMQ_DEFAULT_USER: guest\n       RABBITMQ_DEFAULT_PASS: guest\n     ports:\n-      - \"5672:5672\"\n-      - \"15672:15672\"\n+      - \"5673:5672\"\n+      - \"15673:15672\"\n     volumes:\n       - rabbitmq_data:/var/lib/rabbitmq\n     networks:\n       - gleb-network\n"
+                }
+            ],
+            "date": 1754144834461,
+            "name": "Commit-0",
+            "content": "version: '3.8'\n\nservices:\n  # База данных\n  postgres:\n    image: postgres:15\n    container_name: gleb-postgres\n    environment:\n      POSTGRES_DB: postgres\n      POSTGRES_USER: postgres\n      POSTGRES_PASSWORD: password\n    ports:\n      - \"5432:5432\"\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n    networks:\n      - gleb-network\n    healthcheck:\n      test: [\"CMD-SHELL\", \"pg_isready -U postgres\"]\n      interval: 10s\n      timeout: 5s\n      retries: 5\n\n  # RabbitMQ\n  rabbitmq:\n    image: rabbitmq:3-management\n    container_name: gleb-rabbitmq\n    environment:\n      RABBITMQ_DEFAULT_USER: guest\n      RABBITMQ_DEFAULT_PASS: guest\n    ports:\n      - \"5672:5672\"\n      - \"15672:15672\"\n    volumes:\n      - rabbitmq_data:/var/lib/rabbitmq\n    networks:\n      - gleb-network\n    healthcheck:\n      test: [\"CMD\", \"rabbitmq-diagnostics\", \"ping\"]\n      interval: 10s\n      timeout: 5s\n      retries: 5\n\n  # Prometheus\n  prometheus:\n    image: prom/prometheus:latest\n    container_name: gleb-prometheus\n    ports:\n      - \"9090:9090\"\n    volumes:\n      - ./prometheus.yml:/etc/prometheus/prometheus.yml\n      - prometheus_data:/prometheus\n    command:\n      - '--config.file=/etc/prometheus/prometheus.yml'\n      - '--storage.tsdb.path=/prometheus'\n      - '--web.console.libraries=/etc/prometheus/console_libraries'\n      - '--web.console.templates=/etc/prometheus/consoles'\n      - '--storage.tsdb.retention.time=200h'\n      - '--web.enable-lifecycle'\n    networks:\n      - gleb-network\n    depends_on:\n      - postgres\n      - rabbitmq\n\n  # Grafana для визуализации метрик\n  grafana:\n    image: grafana/grafana:latest\n    container_name: gleb-grafana\n    ports:\n      - \"3000:3000\"\n    environment:\n      GF_SECURITY_ADMIN_PASSWORD: admin\n    volumes:\n      - grafana_data:/var/lib/grafana\n    networks:\n      - gleb-network\n    depends_on:\n      - prometheus\n\n  # Микросервисы\n  user-service:\n    build:\n      context: .\n      dockerfile: Dockerfile.user\n    container_name: gleb-user-service\n    ports:\n      - \"8090:8090\"\n    environment:\n      SPRING_PROFILES_ACTIVE: docker\n    networks:\n      - gleb-network\n    depends_on:\n      postgres:\n        condition: service_healthy\n      rabbitmq:\n        condition: service_healthy\n    restart: unless-stopped\n\n  point-service:\n    build:\n      context: .\n      dockerfile: Dockerfile.point\n    container_name: gleb-point-service\n    ports:\n      - \"8091:8091\"\n      - \"8062:8062\"\n    environment:\n      SPRING_PROFILES_ACTIVE: docker\n    networks:\n      - gleb-network\n    depends_on:\n      postgres:\n        condition: service_healthy\n      rabbitmq:\n        condition: service_healthy\n    restart: unless-stopped\n\n  statistic-service:\n    build:\n      context: .\n      dockerfile: Dockerfile.statistic\n    container_name: gleb-statistic-service\n    ports:\n      - \"8095:8095\"\n    environment:\n      SPRING_PROFILES_ACTIVE: docker\n    networks:\n      - gleb-network\n    depends_on:\n      postgres:\n        condition: service_healthy\n      rabbitmq:\n        condition: service_healthy\n    restart: unless-stopped\n\nvolumes:\n  postgres_data:\n  rabbitmq_data:\n  prometheus_data:\n  grafana_data:\n\nnetworks:\n  gleb-network:\n    driver: bridge "
+        }
+    ]
+}

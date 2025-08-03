@@ -1,0 +1,18 @@
+{
+    "sourceFile": "common/src/main/java/com/viancis/common/config/JacksonConfig.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754152080816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754152080816,
+            "name": "Commit-0",
+            "content": "package com.viancis.common.config;\n\nimport com.fasterxml.jackson.databind.DeserializationFeature;\nimport com.fasterxml.jackson.databind.ObjectMapper;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.context.annotation.Primary;\n\n/**\n * Конфигурация Jackson для строгой десериализации\n * Запрещает игнорировать отсутствующие поля\n */\n@Configuration\npublic class JacksonConfig {\n\n    @Bean\n    @Primary\n    public ObjectMapper objectMapper() {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);\n        mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);\n        mapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, true);\n        return mapper;\n    }\n} "
+        }
+    ]
+}

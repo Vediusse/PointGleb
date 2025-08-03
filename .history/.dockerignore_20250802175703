@@ -1,0 +1,49 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea
+*.iml
+.vscode
+
+# Maven
+target/
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Documentation
+README.md
+HELP.md
+*.md
+
+# Archives
+*.zip
+*.tar.gz
+
+# Cache
+# .mvn/wrapper/maven-wrapper.jar
+# .mvn/wrapper/maven-wrapper.properties
+
+# Test files
+**/test/
+**/tests/
+**/*Test.java
+**/*Tests.java
+**/*Test.kt
+**/*Tests.kt 

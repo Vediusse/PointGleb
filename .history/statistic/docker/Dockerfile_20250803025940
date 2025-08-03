@@ -1,0 +1,37 @@
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+# Копируем Maven wrapper и pom.xml
+COPY ../../mvnw .
+COPY ../../mvnw.cmd .
+COPY ../../pom.xml .
+COPY ../../.mvn .mvn
+
+# Копируем pom.xml файлы всех модулей
+COPY ../../user/pom.xml ./user/pom.xml
+COPY ../../point/pom.xml ./point/pom.xml
+COPY ../../statistic/pom.xml ./statistic/pom.xml
+COPY ../../common/pom.xml ./common/pom.xml
+
+# Копируем исходный код
+COPY ../../statistic/src ./statistic/src
+COPY ../../common/src ./common/src
+
+# Устанавливаем права на выполнение для mvnw
+RUN chmod +x mvnw
+
+# Собираем проект
+RUN ./mvnw clean package -pl statistic -am -DskipTests
+
+# Создаем директорию для приложения
+RUN mkdir -p /app/target
+
+# Копируем собранный JAR файл
+RUN cp statistic/target/*.jar /app/target/app.jar
+
+# Открываем порт
+EXPOSE 8095
+
+# Запускаем приложение
+CMD ["java", "-jar", "/app/target/app.jar"] 

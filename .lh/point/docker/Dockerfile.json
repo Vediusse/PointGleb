@@ -1,0 +1,26 @@
+{
+    "sourceFile": "point/docker/Dockerfile",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1754178538772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754178920630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n COPY ../../statistic/pom.xml ./statistic/pom.xml\n COPY ../../common/pom.xml ./common/pom.xml\n \n \n-COPY ../src ./point/src\n+COPY ../../point/src ./point/src\n COPY ../../common/src ./common/src\n \n \n RUN chmod +x mvnw\n"
+                },
+                {
+                    "date": 1754179168959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n COPY ../../pom.xml .\n COPY ../../.mvn .mvn\n \n \n-COPY ../pom.xml ./point/pom.xml\n COPY ../../user/pom.xml ./user/pom.xml\n+COPY ../../point/pom.xml ./point/pom.xml\n COPY ../../statistic/pom.xml ./statistic/pom.xml\n COPY ../../common/pom.xml ./common/pom.xml\n \n \n"
+                }
+            ],
+            "date": 1754178538772,
+            "name": "Commit-0",
+            "content": "FROM openjdk:21-jdk-slim\n\nWORKDIR /app\n\n\nCOPY ../../mvnw .\nCOPY ../../mvnw.cmd .\nCOPY ../../pom.xml .\nCOPY ../../.mvn .mvn\n\n\nCOPY ../pom.xml ./point/pom.xml\nCOPY ../../user/pom.xml ./user/pom.xml\nCOPY ../../statistic/pom.xml ./statistic/pom.xml\nCOPY ../../common/pom.xml ./common/pom.xml\n\n\nCOPY ../src ./point/src\nCOPY ../../common/src ./common/src\n\n\nRUN chmod +x mvnw\n\n\nRUN ./mvnw clean package -pl point -am -DskipTests\n\n\nRUN mkdir -p /app/target\n\n\nRUN cp point/target/*.jar /app/target/app.jar\n\n\nEXPOSE 8091 8062\n\n\nCMD [\"java\", \"-jar\", \"/app/target/app.jar\"] "
+        }
+    ]
+}

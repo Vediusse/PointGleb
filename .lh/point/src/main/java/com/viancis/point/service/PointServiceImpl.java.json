@@ -1,0 +1,18 @@
+{
+    "sourceFile": "point/src/main/java/com/viancis/point/service/PointServiceImpl.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754178700559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754178700559,
+            "name": "Commit-0",
+            "content": "package com.viancis.point.service;\n\n\nimport com.viancis.common.model.Point;\nimport com.viancis.common.model.PointRequest;\nimport com.viancis.common.repository.PointRepository;\nimport com.viancis.common.service.CustomUserDetails;\nimport jakarta.transaction.Transactional;\nimport lombok.AllArgsConstructor;\nimport org.springframework.scheduling.annotation.Async;\nimport org.springframework.stereotype.Service;\n\nimport java.util.Date;\nimport java.util.List;\nimport java.util.UUID;\nimport java.util.concurrent.CompletableFuture;\n\n@Service\n@AllArgsConstructor\npublic class PointServiceImpl implements PointService {\n\n    private final PointRepository pointRepository;\n\n\n    @Async\n    @Transactional\n    public CompletableFuture<List<Point>> getAllPoints() {\n        return CompletableFuture.supplyAsync(pointRepository::findAll);\n    }\n\n    @Async\n    @Transactional\n    public CompletableFuture<List<Point>> getMyPoints(UUID userId) {\n        return CompletableFuture.supplyAsync(() -> pointRepository.findAllByUserId(userId));\n    }\n\n    @Async\n    @Transactional\n    public CompletableFuture<Point> createPoint(CustomUserDetails user, PointRequest pointRequest) {\n        return CompletableFuture.supplyAsync(() -> {\n            long startTime = System.nanoTime();\n            return pointRepository.save(\n                    new Point(\n                            pointRequest.getX().doubleValue(),\n                            pointRequest.getY().doubleValue(),\n                            pointRequest.getR().doubleValue(),\n                            false,\n                            new Date(),\n                            System.nanoTime() - startTime,\n                            user.getUser()\n                    ).checkInside());\n        }); \n    }\n\n    @Async\n    @Transactional\n    public CompletableFuture<Point> updatePoint(String id, Point updatedPoint) {\n        return CompletableFuture.supplyAsync(() ->\n                pointRepository.findById(id)\n                        .map(existingPoint -> {\n                            existingPoint.setX(updatedPoint.getX());\n                            existingPoint.setY(updatedPoint.getY());\n                            existingPoint.setR(updatedPoint.getR());\n                            existingPoint.setInsideArea(updatedPoint.isInsideArea());\n                            return pointRepository.save(existingPoint);\n                        })\n                        .orElseThrow(() -> new RuntimeException(\"Point not found with id: \" + id))\n        );\n    }\n\n    @Async\n    @Transactional\n    public CompletableFuture<Point> deletePoint(String id) {\n        return CompletableFuture.supplyAsync(() -> {\n            Point pointToDelete = pointRepository.findById(id)\n                    .orElseThrow(() -> new RuntimeException(\"Point not found with id: \" + id));\n            pointRepository.deleteById(id);\n            return pointToDelete;\n        });\n    }\n}"
+        }
+    ]
+}

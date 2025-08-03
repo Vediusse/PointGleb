@@ -1,0 +1,18 @@
+{
+    "sourceFile": "quick-deploy.sh",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754147481770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754147481770,
+            "name": "Commit-0",
+            "content": "#!/bin/bash\n\n# Быстрый деплой проекта Gleb\n# Использование: ./quick-deploy.sh\n\necho \"🚀 Быстрый деплой проекта Gleb...\"\n\n# Проверяем наличие Docker\nif ! command -v docker &> /dev/null; then\n    echo \"❌ Docker не установлен. Установите Docker и попробуйте снова.\"\n    exit 1\nfi\n\n# Останавливаем существующие контейнеры\necho \"🛑 Остановка существующих контейнеров...\"\ndocker-compose down 2>/dev/null || true\n\n# Собираем и запускаем\necho \"🔨 Сборка и запуск проекта...\"\ndocker-compose up -d --build\n\necho \"⏳ Ожидание запуска сервисов (30 секунд)...\"\nsleep 30\n\n# Проверяем статус\necho \"📊 Проверка статуса сервисов...\"\ndocker-compose ps\n\necho \"\"\necho \"✅ Проект успешно развернут!\"\necho \"\"\necho \"🌐 Доступные сервисы:\"\necho \"   User Service:     http://localhost:8090\"\necho \"   Point Service:    http://localhost:8091\"\necho \"   Statistic Service: http://localhost:8095\"\necho \"   RabbitMQ:         http://localhost:15673 (guest/guest)\"\necho \"   Prometheus:       http://localhost:9090\"\necho \"   Grafana:          http://localhost:3000 (admin/admin)\"\necho \"\"\necho \"📈 Метрики:\"\necho \"   User Metrics:     http://localhost:8090/actuator/prometheus\"\necho \"   Point Metrics:    http://localhost:8062/actuator/prometheus\"\necho \"   Statistic Metrics: http://localhost:8095/actuator/prometheus\"\necho \"\"\necho \"💡 Для управления используйте: ./deploy.sh [start|stop|restart|logs|status|clean]\" "
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "point/src/main/java/com/viancis/point/service/CacheServiceImpl.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754180868009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754180952534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,8 @@\n import com.github.benmanes.caffeine.cache.Cache;\n import com.viancis.common.model.PointDTO;\n import com.viancis.common.repository.PointRepository;\n import lombok.AllArgsConstructor;\n-import lombok.Getter;\n-import lombok.NoArgsConstructor;\n-import lombok.Setter;\n import org.springframework.stereotype.Service;\n \n import java.util.ArrayList;\n import java.util.List;\n"
+                }
+            ],
+            "date": 1754180868009,
+            "name": "Commit-0",
+            "content": "package com.viancis.point.service;\n\nimport com.viancis.common.model.Point;\nimport com.github.benmanes.caffeine.cache.Cache;\nimport com.viancis.common.model.PointDTO;\nimport com.viancis.common.repository.PointRepository;\nimport lombok.AllArgsConstructor;\nimport lombok.Getter;\nimport lombok.NoArgsConstructor;\nimport lombok.Setter;\nimport org.springframework.stereotype.Service;\n\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Set;\nimport java.util.UUID;\nimport java.util.stream.Collectors;\nimport com.viancis.common.annotation.CacheService;\n\n@Service\n@AllArgsConstructor\npublic class CacheServiceImpl {\n\n    private Cache<UUID, List<Point>> pointCache;\n\n    private final PointRepository pointRepository;\n\n\n    public Set<UUID> getAllUserIds() {\n        return pointCache.asMap().keySet();\n    }\n\n\n    public List<Point> getPoints(UUID userId) {\n        return pointCache.getIfPresent(userId);\n    }\n\n\n    public void putPoints(UUID userId, List<Point> points) {\n        pointCache.put(userId, points);\n    }\n\n    public void updateCache(UUID userId, Point newPoint) {\n        List<Point> cachedPoints = pointCache.getIfPresent(userId);\n        if (cachedPoints != null) {\n            cachedPoints.add(newPoint);\n        } else {\n            cachedPoints = new ArrayList<>();\n            cachedPoints.add(newPoint);\n        }\n        pointCache.put(userId, cachedPoints);\n    }\n\n    public void removeFromCache(UUID userId, Point pointToRemove) {\n        List<Point> cachedPoints = pointCache.getIfPresent(userId);\n        if (cachedPoints != null) {\n            cachedPoints.remove(pointToRemove);\n            pointCache.put(userId, cachedPoints);\n        }\n    }\n\n    public boolean isUserInCache(UUID userId) {\n        return pointCache.getIfPresent(userId) != null;\n    }\n\n    public void updateCacheForPoints(List<Point> points) {\n        points.forEach(point -> updateCache(point.getUser().getId(), point));\n    }\n\n    public List<PointDTO> getAllPointsDTO() {\n        return pointCache.asMap().values().stream()\n                .flatMap(List::stream)\n                .map(PointDTO::new)\n                .collect(Collectors.toList());\n    }\n\n    public List<Point> getPointsForUsers(Set<UUID> cachedUserIds) {\n        return pointRepository.findPointsForUsers(cachedUserIds);\n    }\n}"
+        }
+    ]
+}

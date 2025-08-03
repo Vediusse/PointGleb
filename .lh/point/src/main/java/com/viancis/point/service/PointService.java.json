@@ -1,0 +1,18 @@
+{
+    "sourceFile": "point/src/main/java/com/viancis/point/service/PointService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754181277103,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754181277103,
+            "name": "Commit-0",
+            "content": "package com.viancis.point.service;\n\nimport com.viancis.common.model.Point;\nimport com.viancis.common.model.PointRequest;\nimport com.viancis.common.service.CustomUserDetails;\nimport java.util.List;\nimport java.util.UUID;\nimport java.util.concurrent.CompletableFuture;\n\npublic interface PointService {\n\n    CompletableFuture<List<Point>> getAllPoints();\n\n    CompletableFuture<List<Point>> getMyPoints(UUID userId);\n\n    CompletableFuture<Point> createPoint(CustomUserDetails user, PointRequest pointRequest);\n\n    CompletableFuture<Point> updatePoint(String id, Point updatedPoint);\n\n    CompletableFuture<Point> deletePoint(String id);\n}"
+        }
+    ]
+}

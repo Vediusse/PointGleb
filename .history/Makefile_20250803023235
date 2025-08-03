@@ -1,0 +1,174 @@
+# Makefile для управления проектом
+# Автор: Gleb
+
+.PHONY: help build up down restart logs clean force watch-user watch-point watch-statistic dev prod
+
+# Переменные
+COMPOSE_DEV = docker-compose -f docker-compose.dev.yml
+COMPOSE_PROD = docker-compose -f docker-compose.yml
+
+# Цвета для вывода
+GREEN = \033[0;32m
+YELLOW = \033[1;33m
+BLUE = \033[0;34m
+NC = \033[0m # No Color
+
+# Справка
+help:
+	@echo "$(BLUE)=== Доступные команды ===$(NC)"
+	@echo "$(GREEN)Основные команды:$(NC)"
+	@echo "  make dev              # Быстрый деплой в dev режиме"
+	@echo "  make prod             # Деплой в production режиме"
+	@echo "  make build            # Сборка образов"
+	@echo "  make up               # Запуск сервисов"
+	@echo "  make down             # Остановка сервисов"
+	@echo "  make restart          # Перезапуск сервисов"
+	@echo "  make logs             # Показать логи"
+	@echo ""
+	@echo "$(GREEN)Управление кэшем:$(NC)"
+	@echo "  make force            # Принудительная пересборка (без кэша)"
+	@echo "  make clean            # Очистить все контейнеры и образы"
+	@echo ""
+	@echo "$(GREEN)Мониторинг изменений:$(NC)"
+	@echo "  make watch-user       # Автоматический перезапуск user-service"
+	@echo "  make watch-point      # Автоматический перезапуск point-service"
+	@echo "  make watch-statistic  # Автоматический перезапуск statistic-service"
+	@echo "  make watch-all        # Мониторинг всех сервисов (умный режим)"
+	@echo "  make watch-all-simple # Мониторинг всех сервисов (упрощенный режим)"
+	@echo "  make watch-all-ultra  # Ультра-простой мониторинг (рекомендуется)"
+	@echo ""
+	@echo "$(GREEN)Отдельные сервисы:$(NC)"
+	@echo "  make build-user       # Сборка только user-service"
+	@echo "  make build-point      # Сборка только point-service"
+	@echo "  make build-statistic  # Сборка только statistic-service"
+	@echo ""
+	@echo "$(YELLOW)Примеры использования:$(NC)"
+	@echo "  make dev              # Первый запуск в dev режиме"
+	@echo "  make force            # При изменении зависимостей"
+	@echo "  make watch-user       # При разработке user-service"
+	@echo "  make watch-all        # Мониторинг всех сервисов"
+
+# Основные команды для dev режима
+dev: build up
+	@echo "$(GREEN)Деплой в dev режиме завершен!$(NC)"
+	@echo "$(BLUE)Доступные сервисы:$(NC)"
+	@echo "  - User Service: http://localhost:8090"
+	@echo "  - Point Service: http://localhost:8091"
+	@echo "  - Statistic Service: http://localhost:8095"
+	@echo "  - Grafana: http://localhost:3000 (admin/admin)"
+	@echo "  - Prometheus: http://localhost:9090"
+	@echo "  - RabbitMQ Management: http://localhost:15673 (guest/guest)"
+
+# Основные команды для prod режима
+prod: build-prod up-prod
+	@echo "$(GREEN)Деплой в production режиме завершен!$(NC)"
+
+# Сборка образов
+build:
+	@echo "$(BLUE)Сборка образов в dev режиме...$(NC)"
+	$(COMPOSE_DEV) build
+
+# Сборка образов для production
+build-prod:
+	@echo "$(BLUE)Сборка образов в production режиме...$(NC)"
+	$(COMPOSE_PROD) build
+
+# Принудительная пересборка
+force:
+	@echo "$(YELLOW)Принудительная пересборка (без кэша)...$(NC)"
+	$(COMPOSE_DEV) build --no-cache
+
+# Запуск сервисов
+up:
+	@echo "$(BLUE)Запуск сервисов в dev режиме...$(NC)"
+	$(COMPOSE_DEV) up -d
+
+# Запуск сервисов в production
+up-prod:
+	@echo "$(BLUE)Запуск сервисов в production режиме...$(NC)"
+	$(COMPOSE_PROD) up -d
+
+# Остановка сервисов
+down:
+	@echo "$(BLUE)Остановка сервисов...$(NC)"
+	$(COMPOSE_DEV) down
+
+# Перезапуск сервисов
+restart:
+	@echo "$(BLUE)Перезапуск сервисов...$(NC)"
+	$(COMPOSE_DEV) restart
+
+# Показать логи
+logs:
+	@echo "$(BLUE)Показ логов сервисов...$(NC)"
+	$(COMPOSE_DEV) logs -f
+
+# Очистка
+clean:
+	@echo "$(YELLOW)Очистка всех контейнеров и образов...$(NC)"
+	$(COMPOSE_DEV) down --volumes --remove-orphans
+	docker system prune -f
+	@echo "$(GREEN)Очистка завершена!$(NC)"
+
+# Сборка отдельных сервисов
+build-user:
+	@echo "$(BLUE)Сборка user-service...$(NC)"
+	$(COMPOSE_DEV) build user-service
+
+build-point:
+	@echo "$(BLUE)Сборка point-service...$(NC)"
+	$(COMPOSE_DEV) build point-service
+
+build-statistic:
+	@echo "$(BLUE)Сборка statistic-service...$(NC)"
+	$(COMPOSE_DEV) build statistic-service
+
+# Мониторинг изменений
+watch-user:
+	@echo "$(BLUE)Запуск мониторинга user-service...$(NC)"
+	./watch.sh -s user-service
+
+watch-point:
+	@echo "$(BLUE)Запуск мониторинга point-service...$(NC)"
+	./watch.sh -s point-service
+
+watch-statistic:
+	@echo "$(BLUE)Запуск мониторинга statistic-service...$(NC)"
+	./watch.sh -s statistic-service
+
+# Мониторинг всех сервисов
+watch-all:
+	@echo "$(BLUE)Запуск мониторинга всех сервисов...$(NC)"
+	./watch-all.sh
+
+watch-all-simple:
+	@echo "$(BLUE)Запуск упрощенного мониторинга всех сервисов...$(NC)"
+	./watch-all.sh -s
+
+watch-all-ultra:
+	@echo "$(BLUE)Запуск ультра-простого мониторинга всех сервисов...$(NC)"
+	./watch-all-simple.sh
+
+# Установка прав на выполнение скриптов
+setup:
+	@echo "$(BLUE)Установка прав на выполнение скриптов...$(NC)"
+	chmod +x deploy.sh watch.sh
+	@echo "$(GREEN)Настройка завершена!$(NC)"
+
+# Проверка статуса
+status:
+	@echo "$(BLUE)Статус сервисов:$(NC)"
+	$(COMPOSE_DEV) ps
+
+# Быстрая пересборка одного сервиса
+rebuild-user: build-user
+	@echo "$(BLUE)Перезапуск user-service...$(NC)"
+	$(COMPOSE_DEV) up -d --no-deps user-service
+
+rebuild-point: build-point
+	@echo "$(BLUE)Перезапуск point-service...$(NC)"
+	$(COMPOSE_DEV) up -d --no-deps point-service
+
+rebuild-statistic: build-statistic
+	@echo "$(BLUE)Перезапуск statistic-service...$(NC)"
+	$(COMPOSE_DEV) up -d --no-deps statistic-service 

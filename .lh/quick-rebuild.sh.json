@@ -1,0 +1,18 @@
+{
+    "sourceFile": "quick-rebuild.sh",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754154957061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754154957061,
+            "name": "Commit-0",
+            "content": "#!/bin/bash\n\n# Скрипт для быстрой пересборки с компиляцией\n# Использование: ./quick-rebuild.sh [service]\n\nSERVICE=${1:-\"all\"}\n\n# Цвета для вывода\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nBLUE='\\033[0;34m'\nNC='\\033[0m'\n\nprint_message() {\n    echo -e \"${GREEN}[QUICK REBUILD]${NC} $1\"\n}\n\nprint_warning() {\n    echo -e \"${YELLOW}[WARNING]${NC} $1\"\n}\n\nprint_info() {\n    echo -e \"${BLUE}[INFO]${NC} $1\"\n}\n\n# Функция для компиляции и пересборки\nquick_rebuild() {\n    local service=$1\n    \n    print_message \"Быстрая пересборка сервиса $service...\"\n    \n    case $service in\n        \"user\"|\"user-service\")\n            print_info \"Компиляция user сервиса...\"\n            ./mvnw clean compile -pl user -am -DskipTests\n            ;;\n        \"point\"|\"point-service\")\n            print_info \"Компиляция point сервиса...\"\n            ./mvnw clean compile -pl point -am -DskipTests\n            ;;\n        \"statistic\"|\"statistic-service\")\n            print_info \"Компиляция statistic сервиса...\"\n            ./mvnw clean compile -pl statistic -am -DskipTests\n            ;;\n        \"all\")\n            print_info \"Компиляция всех сервисов...\"\n            ./mvnw clean compile -DskipTests\n            ;;\n    esac\n    \n    # Перезапуск контейнера\n    print_info \"Перезапуск контейнера...\"\n    docker-compose -f docker-compose.dev.yml restart $service\n    \n    print_message \"Сервис $service пересобран!\"\n}\n\n# Основная логика\nmain() {\n    print_info \"⚡ Быстрая пересборка\"\n    print_info \"Сервис: $SERVICE\"\n    echo \"\"\n    \n    quick_rebuild $SERVICE\n}\n\n# Запуск основной функции\nmain \"$@\" "
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "user/docker/Dockerfile.dev",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754178945234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754179114598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n COPY ../../mvnw .\n COPY ../../mvnw.cmd .\n COPY ../../pom.xml .\n COPY ../../.mvn .mvn\n-COPY ../pom.xml ./user/pom.xml\n+COPY ../../user/pom.xml ./user/pom.xml\n COPY ../../point/pom.xml ./point/pom.xml\n COPY ../../statistic/pom.xml ./statistic/pom.xml\n COPY ../../common/pom.xml ./common/pom.xml\n \n"
+                }
+            ],
+            "date": 1754178945234,
+            "name": "Commit-0",
+            "content": "FROM openjdk:21-jdk-slim\n\nWORKDIR /app\n\n# Этап 1: Копируем только файлы для зависимостей\nCOPY ../../mvnw .\nCOPY ../../mvnw.cmd .\nCOPY ../../pom.xml .\nCOPY ../../.mvn .mvn\nCOPY ../pom.xml ./user/pom.xml\nCOPY ../../point/pom.xml ./point/pom.xml\nCOPY ../../statistic/pom.xml ./statistic/pom.xml\nCOPY ../../common/pom.xml ./common/pom.xml\n\n# Этап 2: Скачиваем зависимости (кэшируется отдельно)\nRUN ./mvnw dependency:go-offline -pl user -am\n\n# Этап 3: Копируем исходный код (меняется часто)\nCOPY ../../user/src ./user/src\nCOPY ../../common/src ./common/src\n\n# Этап 4: Компилируем (кэшируется отдельно)\nRUN ./mvnw compile -pl user -am -DskipTests\n\n# Этап 5: Создаем JAR (меняется при изменении кода)\nRUN ./mvnw package -pl user -am -DskipTests\n\n# Создаем директорию для приложения\nRUN mkdir -p /app/target\n\n# Копируем собранный JAR файл\nRUN cp user/target/*.jar /app/target/app.jar\n\n# Открываем порт\nEXPOSE 8090\n\n# Запускаем приложение\nCMD [\"java\", \"-jar\", \"/app/target/app.jar\"] "
+        }
+    ]
+}

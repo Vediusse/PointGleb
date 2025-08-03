@@ -1,0 +1,18 @@
+{
+    "sourceFile": "watch-all-simple.sh",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754177541789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754177541789,
+            "name": "Commit-0",
+            "content": "#!/bin/bash\n\n# Максимально простой скрипт для мониторинга всех микросервисов\n# Автор: Gleb\n# Версия: 1.0 (ультра-простая)\n\nset -e\n\n# Цвета для вывода\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nBLUE='\\033[0;34m'\nNC='\\033[0m'\n\nprint_info() {\n    echo -e \"${BLUE}[WATCH]${NC} $1\"\n}\n\nprint_success() {\n    echo -e \"${GREEN}[SUCCESS]${NC} $1\"\n}\n\nprint_warning() {\n    echo -e \"${YELLOW}[WARNING]${NC} $1\"\n}\n\nprint_error() {\n    echo -e \"${RED}[ERROR]${NC} $1\"\n}\n\n# Проверка зависимостей\ncheck_dependencies() {\n    if ! command -v fswatch &> /dev/null; then\n        print_error \"fswatch не установлен. Установите его:\"\n        echo \"  macOS: brew install fswatch\"\n        echo \"  Ubuntu: sudo apt-get install fswatch\"\n        echo \"  CentOS: sudo yum install fswatch\"\n        exit 1\n    fi\n}\n\n# Функция перезапуска всех сервисов\nrestart_all_services() {\n    print_info \"Перезапуск всех сервисов...\"\n    \n    # Остановка всех сервисов\n    docker-compose -f docker-compose.dev.yml stop user-service point-service statistic-service 2>/dev/null || true\n    \n    # Пересборка и запуск всех сервисов\n    docker-compose -f docker-compose.dev.yml up -d --build user-service point-service statistic-service\n    \n    print_success \"Все сервисы перезапущены\"\n}\n\n# Основная функция мониторинга\nmain() {\n    print_info \"=== Простой мониторинг всех микросервисов ===\"\n    print_info \"Нажмите Ctrl+C для остановки\"\n    print_info \"\"\n    print_info \"Отслеживаемые директории:\"\n    print_info \"  - user/src\"\n    print_info \"  - point/src\"\n    print_info \"  - statistic/src\"\n    print_info \"  - common/src\"\n    print_info \"\"\n    \n    # Проверка зависимостей\n    check_dependencies\n    \n    # Проверка Docker\n    if ! command -v docker &> /dev/null; then\n        print_error \"Docker не установлен!\"\n        exit 1\n    fi\n    \n    if ! command -v docker-compose &> /dev/null; then\n        print_error \"Docker Compose не установлен!\"\n        exit 1\n    fi\n    \n    # Проверка файла docker-compose.dev.yml\n    if [ ! -f \"docker-compose.dev.yml\" ]; then\n        print_error \"Файл docker-compose.dev.yml не найден!\"\n        exit 1\n    fi\n    \n    # Мониторинг изменений\n    fswatch -o ./user/src ./point/src ./statistic/src ./common/src | while read f; do\n        print_info \"Обнаружены изменения - перезапуск всех сервисов\"\n        restart_all_services\n        print_info \"Ожидание новых изменений...\"\n        print_info \"\"\n    done\n}\n\n# Запуск основной функции\nmain \"$@\" "
+        }
+    ]
+}

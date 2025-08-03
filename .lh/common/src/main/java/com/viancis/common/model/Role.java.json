@@ -1,0 +1,18 @@
+{
+    "sourceFile": "common/src/main/java/com/viancis/common/model/Role.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754243616254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754243616254,
+            "name": "Commit-0",
+            "content": " "
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+# Устанавливаем права на выполнение для mvnw
+RUN chmod +x mvnw
+
+# Этап 1: Копируем только файлы для зависимостей
+COPY mvnw .
+COPY mvnw.cmd .
+COPY pom.xml .
+COPY .mvn .mvn
+COPY user/pom.xml ./user/pom.xml
+COPY point/pom.xml ./point/pom.xml
+COPY statistic/pom.xml ./statistic/pom.xml
+COPY common/pom.xml ./common/pom.xml
+
+# Этап 2: Скачиваем зависимости (кэшируется отдельно)
+RUN ./mvnw dependency:go-offline -pl statistic -am
+
+# Этап 3: Копируем исходный код (меняется часто)
+COPY statistic/src ./statistic/src
+COPY common/src ./common/src
+
+# Этап 4: Компилируем (кэшируется отдельно)
+RUN ./mvnw compile -pl statistic -am -DskipTests
+
+# Этап 5: Создаем JAR (меняется при изменении кода)
+RUN ./mvnw package -pl statistic -am -DskipTests
+
+# Создаем директорию для приложения
+RUN mkdir -p /app/target
+
+# Копируем собранный JAR файл
+RUN cp statistic/target/*.jar /app/target/app.jar
+
+# Открываем порт
+EXPOSE 8095
+
+# Запускаем приложение
+CMD ["java", "-jar", "/app/target/app.jar"] 

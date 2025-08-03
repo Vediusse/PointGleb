@@ -1,0 +1,38 @@
+{
+    "sourceFile": "point/src/main/java/com/viancis/point/controller/PointController.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1754152175778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754152241532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,8 @@\n     @PreAuthorize(\"isAuthenticated()\")\n     public CompletableFuture<ResponseEntity<PointDTO>> createPoint(\n             @AuthenticationPrincipal CustomUserDetails user,\n             @Valid @RequestBody PointRequest point) {\n-                \n         return pointService.createPoint(user, point)\n                 .thenApply(createdPoint -> ResponseEntity.ok(new PointDTO(createdPoint)));\n     }\n \n"
+                },
+                {
+                    "date": 1754152364041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,8 +63,9 @@\n     @PreAuthorize(\"isAuthenticated()\")\n     public CompletableFuture<ResponseEntity<PointDTO>> createPoint(\n             @AuthenticationPrincipal CustomUserDetails user,\n             @Valid @RequestBody PointRequest point) {\n+        System.out.println(\"Received r: \" + point.getR());\n         return pointService.createPoint(user, point)\n                 .thenApply(createdPoint -> ResponseEntity.ok(new PointDTO(createdPoint)));\n     }\n \n"
+                },
+                {
+                    "date": 1754152376459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n     @PreAuthorize(\"isAuthenticated()\")\n     public CompletableFuture<ResponseEntity<PointDTO>> createPoint(\n             @AuthenticationPrincipal CustomUserDetails user,\n             @Valid @RequestBody PointRequest point) {\n-        System.out.println(\"Received r: \" + point.getR());\n+        System.out.println(\"Received r: \" + point.getR() + \"\\n\\n\\n\\n\\n\");\n         return pointService.createPoint(user, point)\n                 .thenApply(createdPoint -> ResponseEntity.ok(new PointDTO(createdPoint)));\n     }\n \n"
+                },
+                {
+                    "date": 1754155787946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,8 +72,9 @@\n     @PutMapping(\"/{id}\")\n     public CompletableFuture<ResponseEntity<PointDTO>> updatePoint(\n             @PathVariable String id,\n             @RequestBody Point updatedPoint) {\n+                \n         return pointService.updatePoint(id, updatedPoint)\n                 .thenApply(updated -> ResponseEntity.ok(new PointDTO(updated)));\n     }\n \n"
+                },
+                {
+                    "date": 1754155872001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,8 @@\n     @PutMapping(\"/{id}\")\n     public CompletableFuture<ResponseEntity<PointDTO>> updatePoint(\n             @PathVariable String id,\n             @RequestBody Point updatedPoint) {\n-                \n         return pointService.updatePoint(id, updatedPoint)\n                 .thenApply(updated -> ResponseEntity.ok(new PointDTO(updated)));\n     }\n \n"
+                }
+            ],
+            "date": 1754152175778,
+            "name": "Commit-0",
+            "content": "package com.viancis.point.controller;\n\nimport com.viancis.common.model.Point;\nimport com.viancis.common.model.PointDTO;\nimport com.viancis.common.model.PointRequest;\nimport com.viancis.common.service.CustomUserDetails;\nimport com.viancis.point.service.PointService;\n\nimport jakarta.validation.Valid;\nimport lombok.AllArgsConstructor;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.beans.factory.annotation.Qualifier;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.security.access.prepost.PreAuthorize;\nimport org.springframework.security.core.annotation.AuthenticationPrincipal;\nimport org.springframework.web.bind.annotation.*;\n\nimport java.util.List;\nimport java.util.concurrent.CompletableFuture;\nimport java.util.stream.Collectors;\n\n@RestController\n@RequestMapping(\"/api/points\")\npublic class PointController {\n\n\n\n    private final PointService pointService;\n\n\n    @Autowired\n    public PointController(@Qualifier(\"pointServiceWithCacheFallback\") PointService pointService) {\n        this.pointService = pointService;\n    }\n\n    @GetMapping\n    public CompletableFuture<ResponseEntity<List<PointDTO>>> getAllPoints() {\n        return pointService.getAllPoints()\n                .thenApply(points ->\n                        points.isEmpty()\n                                ? ResponseEntity.noContent().build()\n                                : ResponseEntity.ok(points.stream()\n                                .map(PointDTO::new)\n                                .collect(Collectors.toList()))\n                );\n    }\n\n    @GetMapping(\"/my\")\n    @PreAuthorize(\"isAuthenticated()\")\n    public CompletableFuture<ResponseEntity<List<PointDTO>>> getMyPoints(\n            @AuthenticationPrincipal CustomUserDetails user) {\n        return pointService.getMyPoints(user.getUser().getId())\n                .thenApply(points ->\n                        points.isEmpty()\n                                ? ResponseEntity.noContent().build()\n                                : ResponseEntity.ok(points.stream()\n                                .map(PointDTO::new)\n                                .collect(Collectors.toList()))\n                );\n    }\n\n    @PostMapping\n    @PreAuthorize(\"isAuthenticated()\")\n    public CompletableFuture<ResponseEntity<PointDTO>> createPoint(\n            @AuthenticationPrincipal CustomUserDetails user,\n            @Valid @RequestBody PointRequest point) {\n                \n        return pointService.createPoint(user, point)\n                .thenApply(createdPoint -> ResponseEntity.ok(new PointDTO(createdPoint)));\n    }\n\n    @PutMapping(\"/{id}\")\n    public CompletableFuture<ResponseEntity<PointDTO>> updatePoint(\n            @PathVariable String id,\n            @RequestBody Point updatedPoint) {\n        return pointService.updatePoint(id, updatedPoint)\n                .thenApply(updated -> ResponseEntity.ok(new PointDTO(updated)));\n    }\n\n    @DeleteMapping(\"/\")\n    public CompletableFuture<ResponseEntity<Void>> deletePoint(@RequestParam String id) {\n        return pointService.deletePoint(id)\n                .thenApply(v -> ResponseEntity.noContent().build());\n    }\n}"
+        }
+    ]
+}

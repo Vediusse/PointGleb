@@ -1,0 +1,18 @@
+{
+    "sourceFile": "auth/src/main/java/com/viancis/auth/handler/JwtAccessDeniedHandler.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754250707780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754250707780,
+            "name": "Commit-0",
+            "content": "package com.viancis.auth.handler;\n\nimport jakarta.servlet.ServletException;\nimport jakarta.servlet.http.HttpServletRequest;\nimport jakarta.servlet.http.HttpServletResponse;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.security.access.AccessDeniedException;\nimport org.springframework.security.web.access.AccessDeniedHandler;\nimport org.springframework.stereotype.Component;\n\nimport java.io.IOException;\n\n@Component\npublic class JwtAccessDeniedHandler implements AccessDeniedHandler {\n\n    private static final Logger logger = LoggerFactory.getLogger(JwtAccessDeniedHandler.class);\n\n    @Override\n    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)\n            throws IOException, ServletException {\n        logger.error(\"Access denied: {}\", accessDeniedException.getMessage()); // логируем!\n        if (!response.isCommitted()) {\n            response.setStatus(HttpServletResponse.SC_FORBIDDEN);\n            response.setContentType(\"application/json\");\n            response.setCharacterEncoding(\"UTF-8\");\n            response.getWriter().write(\"{\\\"error\\\":\\\"Access Denied\\\",\\\"message\\\":\\\"You don't have permission to access this resource\\\"}\");\n        } else {\n            logger.warn(\"Response already committed, cannot handle AccessDeniedException\");\n        }\n    }\n} "
+        }
+    ]
+}

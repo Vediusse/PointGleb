@@ -1,0 +1,18 @@
+{
+    "sourceFile": "user/docker/README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754178538783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754178538783,
+            "name": "Commit-0",
+            "content": "# User Service Docker\n\nDocker конфигурация для User Service.\n\n## Файлы\n\n- `Dockerfile` - Production сборка\n- `Dockerfile.dev` - Development сборка с многоэтапной оптимизацией\n\n## Особенности\n\n- **Production**: Полная сборка с оптимизацией размера\n- **Development**: Многоэтапная сборка с кэшированием зависимостей\n- **Порт**: 8090\n- **Зависимости**: common модуль\n\n## Сборка\n\n```bash\n# Production\ndocker build -f user/docker/Dockerfile -t user-service .\n\n# Development\ndocker build -f user/docker/Dockerfile.dev -t user-service-dev .\n```\n\n## Запуск\n\n```bash\ndocker run -p 8090:8090 user-service\n``` "
+        }
+    ]
+}

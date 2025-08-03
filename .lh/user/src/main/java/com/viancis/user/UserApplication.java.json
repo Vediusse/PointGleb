@@ -1,0 +1,26 @@
+{
+    "sourceFile": "user/src/main/java/com/viancis/user/UserApplication.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1754244492943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754244998870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n import org.springframework.context.annotation.ComponentScan;\n import org.springframework.data.jpa.repository.config.EnableJpaRepositories;\n \n @SpringBootApplication(scanBasePackages = {\"com.viancis\", \"com.viancis.common\"})\n-@EntityScan(basePackages = {\"com.viancis.common.model\"})\n-@EnableJpaRepositories(basePackages = {\"com.viancis.common.repository\"})\n+@EntityScan(basePackages = {\"com.viancis.common.model\", \"com.viancis.auth.model\"})\n+@EnableJpaRepositories(basePackages = {\"com.viancis.common.repository\", \"com.viancis.auth.repository\"})\n @ComponentScan(basePackages = {\"com.viancis.common.component\",\"com.viancis.common.filter\", \"com.viancis.common.config\",\"com.viancis.common.handler\", \"com.viancis.common.service\", \"com.viancis.common.config\"})\n @EnableAuth\n public class UserApplication {\n     public static void main(String[] args) {\n"
+                },
+                {
+                    "date": 1754250213949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n import org.springframework.context.annotation.ComponentScan;\n import org.springframework.data.jpa.repository.config.EnableJpaRepositories;\n \n @SpringBootApplication(scanBasePackages = {\"com.viancis\", \"com.viancis.common\"})\n-@EntityScan(basePackages = {\"com.viancis.common.model\", \"com.viancis.auth.model\"})\n-@EnableJpaRepositories(basePackages = {\"com.viancis.common.repository\", \"com.viancis.auth.repository\"})\n+@EntityScan(basePackages = {\"com.viancis.common.model\"})\n+@EnableJpaRepositories(basePackages = {\"com.viancis.common.repository\"})\n @ComponentScan(basePackages = {\"com.viancis.common.component\",\"com.viancis.common.filter\", \"com.viancis.common.config\",\"com.viancis.common.handler\", \"com.viancis.common.service\", \"com.viancis.common.config\"})\n @EnableAuth\n public class UserApplication {\n     public static void main(String[] args) {\n"
+                }
+            ],
+            "date": 1754244492943,
+            "name": "Commit-0",
+            "content": "package com.viancis.user;\n\nimport com.viancis.auth.annotation.EnableAuth;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.boot.autoconfigure.domain.EntityScan;\nimport org.springframework.context.annotation.ComponentScan;\nimport org.springframework.data.jpa.repository.config.EnableJpaRepositories;\n\n@SpringBootApplication(scanBasePackages = {\"com.viancis\", \"com.viancis.common\"})\n@EntityScan(basePackages = {\"com.viancis.common.model\"})\n@EnableJpaRepositories(basePackages = {\"com.viancis.common.repository\"})\n@ComponentScan(basePackages = {\"com.viancis.common.component\",\"com.viancis.common.filter\", \"com.viancis.common.config\",\"com.viancis.common.handler\", \"com.viancis.common.service\", \"com.viancis.common.config\"})\n@EnableAuth\npublic class UserApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(UserApplication.class, args);\n    }\n}"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "common/src/main/java/com/viancis/common/model/UserDTO.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754151250285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754151250285,
+            "name": "Commit-0",
+            "content": "package com.viancis.common.model;\n\nimport com.viancis.common.service.CustomUserDetails;\nimport jakarta.validation.constraints.NotBlank;\nimport jakarta.validation.constraints.NotNull;\nimport lombok.AllArgsConstructor;\nimport lombok.Data;\nimport lombok.Getter;\nimport lombok.Setter;\nimport org.hibernate.Hibernate;\nimport org.springframework.security.core.userdetails.UserDetails;\nimport org.springframework.transaction.annotation.Transactional;\n\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Set;\nimport java.util.UUID;\nimport java.util.stream.Collectors;\n\n@Data\npublic class UserDTO {\n\n    private UUID id;\n    \n    @NotBlank(message = \"Username обязателен\")\n    @NotNull(message = \"Username обязателен\")\n    private String username;\n    \n    private Set<Role> roles;\n\n\n    public UserDTO() {}\n\n\n    public UserDTO toDTO(CustomUserDetails userDetails){\n        this.id = userDetails.getUser().getId();\n        this.roles = userDetails.getUser().getRoles();\n        this.username = userDetails.getUsername();\n        return this;\n    }\n\n\n    public static UserDTO fromUser(User user) {\n        UserDTO dto = new UserDTO();\n        dto.id = user.getId();\n        dto.username = user.getUsername();\n        dto.roles = user.getRoles();\n        return dto;\n    }\n\n\n    public UserDTO fromUserToDTO(User user) {\n        this.id = user.getId();\n        this.username = user.getUsername();\n        this.roles = user.getRoles();\n        return this;\n    }\n}"
+        }
+    ]
+}
