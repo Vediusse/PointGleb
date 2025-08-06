@@ -1,6 +1,6 @@
-package com.viancis.common.model;
+package com.viancis.common_point_user.model;
 
-import com.viancis.common.service.CustomUserDetails;
+import com.viancis.common_point_user.service.CustomUserDetails;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package com.viancis.common.service;
+package com.viancis.common_point_user.service;
 
-import com.viancis.common.model.Role;
-import com.viancis.common.model.User;
-import com.viancis.common.model.UserDTO;
+import com.viancis.common_point_user.model.Role;
+import com.viancis.common_point_user.model.User;
+import com.viancis.common_point_user.model.UserDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;

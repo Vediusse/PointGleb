@@ -2,9 +2,9 @@ package com.viancis.point.service;
 
 
 import com.viancis.auth.service.CustomUserDetails;
-import com.viancis.common.model.Point;
-import com.viancis.common.model.PointRequest;
-import com.viancis.common.repository.PointRepository;
+import com.viancis.common_point_user.model.Point;
+import com.viancis.common_point_user.model.PointRequest;
+import com.viancis.point.repository.PointRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -48,7 +48,7 @@ public class PointServiceImpl implements PointService {
                             false,
                             new Date(),
                             System.nanoTime() - startTime,
-                            user.getUser().getId()
+                            user.getUser()
                     ).checkInside());
         }); 
     }

@@ -35,7 +35,7 @@ check_dependencies() {
         print_error "Maven не установлен!"
         exit 1
     fi
-    
+
     if ! command -v java &> /dev/null; then
         print_error "Java не установлена!"
         exit 1
@@ -54,14 +54,14 @@ start_service() {
     local service_name=$1
     local service_dir=$2
     local port=$3
-    
+
     print_info "Запуск $service_name на порту $port..."
-    
+
     cd "$service_dir"
     nohup java -jar target/*.jar > ../${service_name}.log 2>&1 &
     local pid=$!
     echo $pid > ../${service_name}.pid
-    
+
     cd ..
     print_success "$service_name запущен (PID: $pid)"
 }
@@ -69,7 +69,7 @@ start_service() {
 # Остановка сервиса
 stop_service() {
     local service_name=$1
-    
+
     if [ -f "${service_name}.pid" ]; then
         local pid=$(cat "${service_name}.pid")
         print_info "Остановка $service_name (PID: $pid)..."
@@ -83,7 +83,7 @@ stop_service() {
 check_service_status() {
     local service_name=$1
     local port=$2
-    
+
     if [ -f "${service_name}.pid" ]; then
         local pid=$(cat "${service_name}.pid")
         if ps -p $pid > /dev/null 2>&1; then
@@ -110,16 +110,16 @@ show_help() {
     echo "  clean                 Очистка логов и PID файлов"
     echo "  -h, --help            Показать эту справку"
     echo ""
-    
+
 }
 
 # Основная логика
 main() {
     local command=$1
-    
+
     # Проверка зависимостей
     check_dependencies
-    
+
     case $command in
         start)
             print_info "Запуск проекта в локальном режиме"
@@ -183,4 +183,4 @@ main() {
 }
 
 
-main "$@" 
+main "$@"

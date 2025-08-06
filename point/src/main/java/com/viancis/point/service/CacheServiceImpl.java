@@ -1,9 +1,9 @@
 package com.viancis.point.service;
 
-import com.viancis.common.model.Point;
+import com.viancis.common_point_user.model.Point;
 import com.github.benmanes.caffeine.cache.Cache;
-import com.viancis.common.model.PointDTO;
-import com.viancis.common.repository.PointRepository;
+import com.viancis.common_point_user.dto.PointDTO;
+import com.viancis.point.repository.PointRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import com.viancis.common.annotation.CacheService;
 
 @Service
 @AllArgsConstructor
@@ -61,7 +60,7 @@ public class CacheServiceImpl {
     }
 
     public void updateCacheForPoints(List<Point> points) {
-        points.forEach(point -> updateCache(point.getUserId(), point));
+        points.forEach(point -> updateCache(point.getUser().getId(), point));
     }
 
     public List<PointDTO> getAllPointsDTO() {

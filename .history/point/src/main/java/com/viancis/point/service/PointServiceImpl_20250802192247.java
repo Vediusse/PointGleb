@@ -1,10 +1,10 @@
 package com.viancis.point.service;
 
 
-import com.viancis.common.model.Point;
-import com.viancis.common.model.PointRequest;
-import com.viancis.common.repository.PointRepository;
-import com.viancis.common.service.CustomUserDetails;
+import com.viancis.common_point_user.model.Point;
+import com.viancis.common_point_user.model.PointRequest;
+import com.viancis.common_point_user.repository.PointRepository;
+import com.viancis.common_point_user.service.CustomUserDetails;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Async;

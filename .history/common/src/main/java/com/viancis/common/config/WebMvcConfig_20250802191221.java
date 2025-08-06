@@ -1,6 +1,6 @@
-package com.viancis.common.config;
+package com.viancis.common_point_user.config;
 
-import com.viancis.common.resolver.ValidatedRequestArgumentResolver;
+import com.viancis.common_point_user.resolver.ValidatedRequestArgumentResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

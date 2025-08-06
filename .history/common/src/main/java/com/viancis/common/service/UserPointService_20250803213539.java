@@ -1,10 +1,10 @@
-package com.viancis.common.service;
+package com.viancis.common_point_user.service;
 
 import com.viancis.auth.model.User;
 import com.viancis.auth.repository.UserRepository;
-import com.viancis.common.model.Point;
-import com.viancis.common.repository.PointRepository;
-import com.viancis.common.dto.UserDTO;
+import com.viancis.common_point_user.model.Point;
+import com.viancis.common_point_user.repository.PointRepository;
+import com.viancis.common_point_user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

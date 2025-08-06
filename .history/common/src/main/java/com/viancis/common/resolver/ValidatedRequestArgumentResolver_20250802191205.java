@@ -1,6 +1,6 @@
-package com.viancis.common.resolver;
+package com.viancis.common_point_user.resolver;
 
-import com.viancis.common.annotation.ValidatedRequest;
+import com.viancis.common_point_user.annotation.ValidatedRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;

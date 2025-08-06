@@ -1,7 +1,7 @@
 package com.viancis.statistic.controller;
 
 
-import com.viancis.common.dto.PointNotification;
+import com.viancis.common_point_user.dto.PointNotification;
 import com.viancis.statistic.service.NotificationStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

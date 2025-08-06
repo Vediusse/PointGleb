@@ -1,4 +1,4 @@
-package com.viancis.common.service;
+package com.viancis.common_point_user.service;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

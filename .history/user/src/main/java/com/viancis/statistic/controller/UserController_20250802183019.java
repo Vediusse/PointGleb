@@ -1,9 +1,9 @@
 package com.viancis.statistic.controller;
 
-import com.viancis.common.model.User;
-import com.viancis.common.model.UserDTO;
-import com.viancis.common.response.LoginResponse;
-import com.viancis.common.service.CustomUserDetails;
+import com.viancis.common_point_user.model.User;
+import com.viancis.common_point_user.model.UserDTO;
+import com.viancis.common_point_user.response.LoginResponse;
+import com.viancis.common_point_user.service.CustomUserDetails;
 import com.viancis.statistic.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

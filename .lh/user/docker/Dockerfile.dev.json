@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1754178945234,
@@ -12,6 +12,10 @@
                 {
                     "date": 1754179114598,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n COPY ../../mvnw .\n COPY ../../mvnw.cmd .\n COPY ../../pom.xml .\n COPY ../../.mvn .mvn\n-COPY ../pom.xml ./user/pom.xml\n+COPY ../../user/pom.xml ./user/pom.xml\n COPY ../../point/pom.xml ./point/pom.xml\n COPY ../../statistic/pom.xml ./statistic/pom.xml\n COPY ../../common/pom.xml ./common/pom.xml\n \n"
+                },
+                {
+                    "date": 1754264075618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,15 +10,17 @@\n COPY ../../user/pom.xml ./user/pom.xml\n COPY ../../point/pom.xml ./point/pom.xml\n COPY ../../statistic/pom.xml ./statistic/pom.xml\n COPY ../../common/pom.xml ./common/pom.xml\n+COPY ../../auth/pom.xml ./auth/pom.xml\n \n # Этап 2: Скачиваем зависимости (кэшируется отдельно)\n RUN ./mvnw dependency:go-offline -pl user -am\n \n # Этап 3: Копируем исходный код (меняется часто)\n COPY ../../user/src ./user/src\n COPY ../../common/src ./common/src\n+COPY ../../auth/src ./auth/src\n \n # Этап 4: Компилируем (кэшируется отдельно)\n RUN ./mvnw compile -pl user -am -DskipTests\n \n"
                 }
             ],
             "date": 1754178945234,

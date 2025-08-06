@@ -1,4 +1,4 @@
-package com.viancis.common.handler;
+package com.viancis.common_point_user.handler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

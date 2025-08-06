@@ -16,12 +16,14 @@
         <module>point</module>
         <module>user</module>
         <module>statistic</module>
+        <module>common_point_user</module>
         <module>common</module>
         <module>auth</module>
+        <module>eureka</module>
     </modules>
     <properties>
         <java.version>21</java.version>
-        <spring-boot.version>3.2.0</spring-boot.version>
+        <spring-boot.version>3.4.0</spring-boot.version>
         <springdoc.version>1.5.10</springdoc.version>
         <hibernate.version>5.6.5.Final</hibernate.version>
         <h2.version>1.4.200</h2.version>

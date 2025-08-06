@@ -83,7 +83,8 @@ public class SecurityConfig {
                 "/api/version",
                 "/api/monitoring/log",
                 "/api/jenkins-job-update",
-                "/ws/public/**"
+                "/ws/public/**",
+                "/actuator/**"
         );
     }
 

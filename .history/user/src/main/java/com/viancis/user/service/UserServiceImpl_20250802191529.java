@@ -1,16 +1,16 @@
 package com.viancis.user.service;
 
-import com.viancis.common.component.PasswordEncoderComponent;
-import com.viancis.common.exception.InvalidCredentialsException;
-import com.viancis.common.exception.UserAlreadyExistsException;
-import com.viancis.common.exception.UserNotFoundException;
-import com.viancis.common.filter.JwtTokenProvider;
-import com.viancis.common.model.Role;
-import com.viancis.common.model.User;
-import com.viancis.common.model.UserDTO;
-import com.viancis.common.repository.UserRepository;
-import com.viancis.common.response.LoginResponse;
-import com.viancis.common.service.CustomUserDetails;
+import com.viancis.common_point_user.component.PasswordEncoderComponent;
+import com.viancis.common_point_user.exception.InvalidCredentialsException;
+import com.viancis.common_point_user.exception.UserAlreadyExistsException;
+import com.viancis.common_point_user.exception.UserNotFoundException;
+import com.viancis.common_point_user.filter.JwtTokenProvider;
+import com.viancis.common_point_user.model.Role;
+import com.viancis.common_point_user.model.User;
+import com.viancis.common_point_user.model.UserDTO;
+import com.viancis.common_point_user.repository.UserRepository;
+import com.viancis.common_point_user.response.LoginResponse;
+import com.viancis.common_point_user.service.CustomUserDetails;
 import com.viancis.user.controller.LoginRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;

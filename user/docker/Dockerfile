@@ -12,11 +12,11 @@ COPY ../../.mvn .mvn
 COPY ../../user/pom.xml ./user/pom.xml
 COPY ../../point/pom.xml ./point/pom.xml
 COPY ../../statistic/pom.xml ./statistic/pom.xml
-COPY ../../common/pom.xml ./common/pom.xml
+COPY ../../common_point_user/pom.xml ./common/pom.xml
 
 
 COPY ../../user/src ./user/src
-COPY ../../common/src ./common/src
+COPY ../../common_point_user/src ./common/src
 
 # Устанавливаем права на выполнение для mvnw
 RUN chmod +x mvnw

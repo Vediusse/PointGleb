@@ -1,6 +1,6 @@
-package com.viancis.common.filter;
+package com.viancis.common_point_user.filter;
 
-import com.viancis.common.service.CustomUserDetails;
+import com.viancis.common_point_user.service.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

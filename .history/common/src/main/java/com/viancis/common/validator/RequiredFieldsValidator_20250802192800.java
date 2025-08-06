@@ -1,4 +1,4 @@
-package com.viancis.common.validator;
+package com.viancis.common_point_user.validator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

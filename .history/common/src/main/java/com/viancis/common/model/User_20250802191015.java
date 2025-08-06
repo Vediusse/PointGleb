@@ -1,4 +1,4 @@
-package com.viancis.common.model;
+package com.viancis.common_point_user.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

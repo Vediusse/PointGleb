@@ -10,7 +10,8 @@ COPY ../../.mvn .mvn
 COPY ../../user/pom.xml ./user/pom.xml
 COPY ../../point/pom.xml ./point/pom.xml
 COPY ../../statistic/pom.xml ./statistic/pom.xml
-COPY ../../common/pom.xml ./common/pom.xml
+COPY ../../common_point_user/pom.xml ./common/pom.xml
+COPY ../../auth/pom.xml ./auth/pom.xml
 
 # Этап 2: Скачиваем зависимости (кэшируется отдельно)
 RUN ./mvnw dependency:go-offline -pl user -am
@@ -18,6 +19,7 @@ RUN ./mvnw dependency:go-offline -pl user -am
 # Этап 3: Копируем исходный код (меняется часто)
 COPY ../../user/src ./user/src
 COPY ../../common/src ./common/src
+COPY ../../auth/src ./auth/src
 
 # Этап 4: Компилируем (кэшируется отдельно)
 RUN ./mvnw compile -pl user -am -DskipTests

@@ -5,6 +5,8 @@ import com.viancis.auth.model.UserDTO;
 import com.viancis.auth.model.User;
 import com.viancis.auth.response.LoginResponse;
 import com.viancis.auth.service.CustomUserDetails;
+import com.viancis.common_point_user.dto.PointDTO;
+import com.viancis.user.service.PointClient;
 import com.viancis.user.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,22 +34,25 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @Operation(
-            summary = "Get all users",
-            description = "This endpoint returns a list of all users."
-    )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "List of users retrieved successfully",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDTO.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
-    })
-    @GetMapping
-    @PreAuthorize("permitAll()")
-    public CompletableFuture<ResponseEntity<List<UserDTO>>> getAllUsers() {
-        return userService.getAllUsers()
-                .thenApply(ResponseEntity::ok);
-    }
+    @Autowired
+    private PointClient pointClient;
+
+//    @Operation(
+//            summary = "Get all users",
+//            description = "This endpoint returns a list of all users."
+//    )
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "List of users retrieved successfully",
+//                    content = @Content(mediaType = "application/json",
+//                            schema = @Schema(implementation = UserDTO.class))),
+//            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+//    })
+//    @GetMapping
+//    @PreAuthorize("permitAll()")
+//    public CompletableFuture<ResponseEntity<List<UserDTO>>> getAllUsers() {
+//        return userService.getAllUsers()
+//                .thenApply(ResponseEntity::ok);
+//    }
 
     @Operation(
             summary = "Get user by ID",
@@ -154,4 +159,13 @@ public class UserController {
         return userService.updateUserBySelf(userDetails, updatedUser)
                 .thenApply(ResponseEntity::ok);
     }
+
+    @GetMapping("/points")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<PointDTO>> pointsMe(
+            @RequestHeader("Authorization") String token
+            ) {
+        return pointClient.getMyPoints(token);
+    }
+
 }

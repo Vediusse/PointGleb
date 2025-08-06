@@ -47,14 +47,14 @@ public class UserServiceImpl {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Async
-    @Transactional
-    public CompletableFuture<List<UserDTO>> getAllUsers() {
-        return CompletableFuture
-                .supplyAsync(() -> userPointRepository.findAllWithPoints().stream()
-                .map(UserDTO::fromUser)
-                .collect(Collectors.toList()));
-    }
+//    @Async
+//    @Transactional
+//    public CompletableFuture<List<UserDTO>> getAllUsers() {
+//        return CompletableFuture
+//                .supplyAsync(() -> userPointRepository.findAllWithPoints().stream()
+//                .map(UserDTO::fromUser)
+//                .collect(Collectors.toList()));
+//    }
 
     @Async
     @Transactional

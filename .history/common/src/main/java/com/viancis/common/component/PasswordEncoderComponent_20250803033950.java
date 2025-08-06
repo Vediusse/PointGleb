@@ -1,4 +1,4 @@
-package com.viancis.common.component;
+package com.viancis.common_point_user.component;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

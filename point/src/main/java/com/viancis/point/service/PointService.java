@@ -1,8 +1,8 @@
 package com.viancis.point.service;
 
 import com.viancis.auth.service.CustomUserDetails;
-import com.viancis.common.model.Point;
-import com.viancis.common.model.PointRequest;
+import com.viancis.common_point_user.model.Point;
+import com.viancis.common_point_user.model.PointRequest;
 
 import java.util.List;
 import java.util.UUID;

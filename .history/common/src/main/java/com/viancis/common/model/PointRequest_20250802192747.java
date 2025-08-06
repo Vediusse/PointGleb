@@ -1,6 +1,6 @@
-package com.viancis.common.model;
+package com.viancis.common_point_user.model;
 
-import com.viancis.common.annotation.RequiredFields;
+import com.viancis.common_point_user.annotation.RequiredFields;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;

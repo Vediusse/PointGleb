@@ -16,7 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <kotlin.version>2.0.21</kotlin.version>
-        <spring-boot.version>3.2.0</spring-boot.version>
+        <spring-boot.version>3.4.0</spring-boot.version>
         <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
     </properties>
     <dependencies>
@@ -24,7 +24,12 @@
             <groupId>com.viancis</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.viancis</groupId>
+            <artifactId>common_point_user</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -109,7 +114,17 @@
             <scope>test</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>4.2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>4.2.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

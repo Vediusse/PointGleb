@@ -1,10 +1,10 @@
-package com.viancis.common.handler;
+package com.viancis.common_point_user.handler;
 
 
-import com.viancis.common.exception.CustomAuthenticationException;
-import com.viancis.common.exception.InvalidCredentialsException;
-import com.viancis.common.exception.UserAlreadyExistsException;
-import com.viancis.common.exception.UserNotFoundException;
+import com.viancis.common_point_user.exception.CustomAuthenticationException;
+import com.viancis.common_point_user.exception.InvalidCredentialsException;
+import com.viancis.common_point_user.exception.UserAlreadyExistsException;
+import com.viancis.common_point_user.exception.UserNotFoundException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

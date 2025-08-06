@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1754154957102,
@@ -16,6 +16,10 @@
                 {
                     "date": 1754176267926,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,18 +116,14 @@\n       - \"8091:8091\"\n       - \"8062:8062\"\n     environment:\n       SPRING_PROFILES_ACTIVE: docker\n-      SPRING_DEVTOOLS_RESTART_ENABLED: \"true\"\n-      SPRING_DEVTOOLS_LIVERELOAD_ENABLED: \"true\"\n     volumes:\n       # Монтируем исходный код для hot reload\n       - ./point/src:/app/point/src\n       - ./common/src:/app/common/src\n       # Монтируем Maven cache для ускорения сборки\n       - maven_cache:/root/.m2\n-      # Монтируем target для hot reload\n-      - ./point/target:/app/point/target\n     networks:\n       - gleb-network\n     depends_on:\n       postgres:\n@@ -144,18 +140,14 @@\n     ports:\n       - \"8095:8095\"\n     environment:\n       SPRING_PROFILES_ACTIVE: docker\n-      SPRING_DEVTOOLS_RESTART_ENABLED: \"true\"\n-      SPRING_DEVTOOLS_LIVERELOAD_ENABLED: \"true\"\n     volumes:\n       # Монтируем исходный код для hot reload\n       - ./statistic/src:/app/statistic/src\n       - ./common/src:/app/common/src\n       # Монтируем Maven cache для ускорения сборки\n       - maven_cache:/root/.m2\n-      # Монтируем target для hot reload\n-      - ./statistic/target:/app/statistic/target\n     networks:\n       - gleb-network\n     depends_on:\n       postgres:\n"
+                },
+                {
+                    "date": 1754264075618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n   # Микросервисы с volume mounts для разработки\n   user-service:\n     build:\n       context: .\n-      dockerfile: Dockerfile.user.dev\n+      dockerfile: user/docker/Dockerfile.dev\n     container_name: gleb-user-service-dev\n     ports:\n       - \"8090:8090\"\n     environment:\n@@ -93,8 +93,9 @@\n     volumes:\n       # Монтируем исходный код для hot reload\n       - ./user/src:/app/user/src\n       - ./common/src:/app/common/src\n+      - ./auth/src:/app/auth/src\n       # Монтируем Maven cache для ускорения сборки\n       - maven_cache:/root/.m2\n       # Монтируем target для hot reload\n       - ./user/target:/app/user/target\n@@ -109,9 +110,9 @@\n \n   point-service:\n     build:\n       context: .\n-      dockerfile: Dockerfile.point.dev\n+      dockerfile: point/docker/Dockerfile.dev\n     container_name: gleb-point-service-dev\n     ports:\n       - \"8091:8091\"\n       - \"8062:8062\"\n@@ -120,8 +121,9 @@\n     volumes:\n       # Монтируем исходный код для hot reload\n       - ./point/src:/app/point/src\n       - ./common/src:/app/common/src\n+      - ./auth/src:/app/auth/src\n       # Монтируем Maven cache для ускорения сборки\n       - maven_cache:/root/.m2\n     networks:\n       - gleb-network\n@@ -134,9 +136,9 @@\n \n   statistic-service:\n     build:\n       context: .\n-      dockerfile: Dockerfile.statistic.dev\n+      dockerfile: statistic/docker/Dockerfile.dev\n     container_name: gleb-statistic-service-dev\n     ports:\n       - \"8095:8095\"\n     environment:\n@@ -144,8 +146,9 @@\n     volumes:\n       # Монтируем исходный код для hot reload\n       - ./statistic/src:/app/statistic/src\n       - ./common/src:/app/common/src\n+      - ./auth/src:/app/auth/src\n       # Монтируем Maven cache для ускорения сборки\n       - maven_cache:/root/.m2\n     networks:\n       - gleb-network\n"
                 }
             ],
             "date": 1754154957102,

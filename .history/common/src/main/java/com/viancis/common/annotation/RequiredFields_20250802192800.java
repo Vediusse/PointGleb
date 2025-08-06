@@ -1,6 +1,6 @@
-package com.viancis.common.annotation;
+package com.viancis.common_point_user.annotation;
 
-import com.viancis.common.validator.RequiredFieldsValidator;
+import com.viancis.common_point_user.validator.RequiredFieldsValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import java.lang.annotation.ElementType;

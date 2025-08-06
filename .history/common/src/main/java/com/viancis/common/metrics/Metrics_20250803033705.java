@@ -1,4 +1,4 @@
-package com.viancis.common.metrics;
+package com.viancis.common_point_user.metrics;
 
 import lombok.Getter;
 import lombok.Setter;

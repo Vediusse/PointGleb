@@ -1,7 +1,7 @@
-package com.viancis.common.dto;
+package com.viancis.common_point_user.dto;
 
 import com.viancis.auth.model.User;
-import com.viancis.common.model.Point;
+import com.viancis.common_point_user.model.Point;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

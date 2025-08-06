@@ -1,6 +1,6 @@
-package com.viancis.common.model;
+package com.viancis.common_point_user.model;
 
-import com.viancis.common.annotation.RequiredFields;
+import com.viancis.common_point_user.annotation.RequiredFields;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

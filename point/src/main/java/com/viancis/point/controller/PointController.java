@@ -1,14 +1,14 @@
 package com.viancis.point.controller;
 
 import com.viancis.auth.service.CustomUserDetails;
-import com.viancis.common.model.Point;
-import com.viancis.common.model.PointDTO;
-import com.viancis.common.model.PointRequest;
+import com.viancis.common_point_user.model.Point;
+import com.viancis.common_point_user.dto.PointDTO;
+import com.viancis.common_point_user.model.PointRequest;
 
 import com.viancis.point.service.PointService;
 
+import com.viancis.point.service.PointServiceWithCacheFallback;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;

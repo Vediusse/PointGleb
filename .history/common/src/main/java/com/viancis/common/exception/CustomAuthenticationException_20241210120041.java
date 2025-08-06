@@ -1,4 +1,4 @@
-package com.viancis.common.exception;
+package com.viancis.common_point_user.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

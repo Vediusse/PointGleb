@@ -1,10 +1,9 @@
 package com.viancis.point.service;
 
 import com.viancis.auth.service.CustomUserDetails;
-import com.viancis.common.dto.PointNotification;
-import com.viancis.common.model.Point;
-import com.viancis.common.model.PointRequest;
-import com.viancis.auth.model.UserDTO;
+import com.viancis.common_point_user.dto.PointNotification;
+import com.viancis.common_point_user.model.Point;
+import com.viancis.common_point_user.model.PointRequest;
 
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -66,7 +65,6 @@ public class PointServiceWithCacheFallback implements PointService {
     public CompletableFuture<Point> createPoint(CustomUserDetails user, PointRequest pointRequest) {
         return pointService.createPoint(user, pointRequest)
                 .thenApply(createdPoint -> {
-
                     CompletableFuture.runAsync(() -> {
                         try {
                             cacheService.updateCache(user.getUser().getId(), createdPoint);
@@ -91,7 +89,7 @@ public class PointServiceWithCacheFallback implements PointService {
     public CompletableFuture<Point> updatePoint(String id, Point updatedPoint) {
         return pointService.updatePoint(id, updatedPoint)
                 .thenApply(updated -> {
-                    cacheService.updateCache(updated.getUserId(), updated);
+                    cacheService.updateCache(updated.getUser().getId(), updated);
                     return updated;
                 })
                 .exceptionallyCompose(ex -> {
@@ -105,7 +103,7 @@ public class PointServiceWithCacheFallback implements PointService {
         return pointService.deletePoint(id)
                 .thenApply(point -> {
                     try {
-                        cacheService.removeFromCache(point.getUserId(), point);
+                        cacheService.removeFromCache(point.getUser().getId(), point);
                     } catch (Exception ex) {
                         logger.error("Failed to update cache: {}", ex.getMessage(), ex);
                     }

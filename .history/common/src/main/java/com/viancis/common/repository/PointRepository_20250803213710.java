@@ -1,6 +1,6 @@
-package com.viancis.common.repository;
+package com.viancis.common_point_user.repository;
 
-import com.viancis.common.model.Point;
+import com.viancis.common_point_user.model.Point;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

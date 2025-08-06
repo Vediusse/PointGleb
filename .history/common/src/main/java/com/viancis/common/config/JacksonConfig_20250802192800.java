@@ -1,4 +1,4 @@
-package com.viancis.common.config;
+package com.viancis.common_point_user.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

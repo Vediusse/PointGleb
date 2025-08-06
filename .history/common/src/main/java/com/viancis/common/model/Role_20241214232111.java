@@ -1,4 +1,4 @@
-package com.viancis.common.model;
+package com.viancis.common_point_user.model;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

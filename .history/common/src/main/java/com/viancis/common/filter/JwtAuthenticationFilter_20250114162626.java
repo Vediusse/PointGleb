@@ -1,7 +1,7 @@
-package com.viancis.common.filter;
+package com.viancis.common_point_user.filter;
 
-import com.viancis.common.handler.JwtAccessDeniedHandler;
-import com.viancis.common.service.CustomUserDetails;
+import com.viancis.common_point_user.handler.JwtAccessDeniedHandler;
+import com.viancis.common_point_user.service.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

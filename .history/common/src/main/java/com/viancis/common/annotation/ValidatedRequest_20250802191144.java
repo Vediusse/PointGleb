@@ -1,4 +1,4 @@
-package com.viancis.common.annotation;
+package com.viancis.common_point_user.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

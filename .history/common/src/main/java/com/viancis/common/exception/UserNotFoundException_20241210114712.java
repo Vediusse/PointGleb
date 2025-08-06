@@ -1,4 +1,4 @@
-package com.viancis.common.exception;
+package com.viancis.common_point_user.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String id) {

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1754178538783,
@@ -16,6 +16,10 @@
                 {
                     "date": 1754179164053,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n COPY ../../mvnw .\n COPY ../../mvnw.cmd .\n COPY ../../pom.xml .\n COPY ../../.mvn .mvn\n-COPY ../pom.xml ./point/pom.xml\n COPY ../../user/pom.xml ./user/pom.xml\n+COPY ../../point/pom.xml ./point/pom.xml\n COPY ../../statistic/pom.xml ./statistic/pom.xml\n COPY ../../common/pom.xml ./common/pom.xml\n \n \n"
+                },
+                {
+                    "date": 1754264075619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,15 +10,16 @@\n COPY ../../user/pom.xml ./user/pom.xml\n COPY ../../point/pom.xml ./point/pom.xml\n COPY ../../statistic/pom.xml ./statistic/pom.xml\n COPY ../../common/pom.xml ./common/pom.xml\n+COPY ../../auth/pom.xml ./auth/pom.xml\n \n-\n RUN ./mvnw dependency:go-offline -pl point -am\n \n \n COPY ../../point/src ./point/src\n COPY ../../common/src ./common/src\n+COPY ../../auth/src ./auth/src\n \n \n RUN ./mvnw compile -pl point -am -DskipTests\n \n"
                 }
             ],
             "date": 1754178538783,

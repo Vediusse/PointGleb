@@ -1,11 +1,11 @@
-package com.viancis.common.config;
+package com.viancis.common_point_user.config;
 
 
-import com.viancis.common.component.PasswordEncoderComponent;
-import com.viancis.common.filter.JwtAuthenticationFilter;
-import com.viancis.common.handler.JwtAccessDeniedHandler;
-import com.viancis.common.handler.JwtAuthenticationEntryPoint;
-import com.viancis.common.service.CustomUserDetailsService;
+import com.viancis.common_point_user.component.PasswordEncoderComponent;
+import com.viancis.common_point_user.filter.JwtAuthenticationFilter;
+import com.viancis.common_point_user.handler.JwtAccessDeniedHandler;
+import com.viancis.common_point_user.handler.JwtAuthenticationEntryPoint;
+import com.viancis.common_point_user.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1754244998851,
@@ -12,6 +12,10 @@
                 {
                     "date": 1754250213948,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n \n import com.fasterxml.jackson.annotation.JsonBackReference;\n import com.fasterxml.jackson.annotation.JsonIgnore;\n+import com.viancis.auth.model.User;\n import jakarta.persistence.*;\n import lombok.AllArgsConstructor;\n import lombok.Getter;\n import lombok.NoArgsConstructor;\n@@ -13,9 +14,8 @@\n \n import java.io.Serializable;\n import java.time.LocalDateTime;\n import java.util.Date;\n-import java.util.UUID;\n \n @Entity\n @Table(name = \"points\")\n @Getter\n@@ -48,20 +48,22 @@\n \n     @Column(nullable = false)\n     private long executionTime;\n \n-    @Column(name = \"user_id\", nullable = false)\n-    private UUID userId;\n+    @ManyToOne(fetch = FetchType.EAGER)\n+    @JoinColumn(name = \"user_id\", nullable = false)\n+    @JsonBackReference(value = \"user-points\")\n+    private User user;\n \n \n-    public Point(double x, double y, double r, boolean insideArea, Date timestamp, long executionTime, UUID userId) {\n+    public Point(double x, double y, double r, boolean insideArea, Date timestamp, long executionTime, User user) {\n         this.x = x;\n         this.y = y;\n         this.r = r;\n         this.insideArea = insideArea;\n         this.timestamp = timestamp;\n         this.executionTime = executionTime;\n-        this.userId = userId;\n+        this.user = user;\n     }\n \n \n     public Point checkInside() {\n"
+                },
+                {
+                    "date": 1754398636059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,8 +51,12 @@\n \n     @Column(name = \"user_id\", nullable = false)\n     private UUID userId;\n \n+    @ManyToOne\n+    @JoinColumn(name = \"user_id\", nullable = false)\n+    private User user;\n+\n     \n \n \n     public Point(double x, double y, double r, boolean insideArea, Date timestamp, long executionTime, UUID userId) {\n"
                 }
             ],
             "date": 1754244998851,

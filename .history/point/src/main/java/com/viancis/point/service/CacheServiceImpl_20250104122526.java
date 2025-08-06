@@ -1,10 +1,10 @@
 package com.viancis.point.service;
 
-import com.viancis.common.annotation.CacheEvent;
-import com.viancis.common.model.Point;
+import com.viancis.common_point_user.annotation.CacheEvent;
+import com.viancis.common_point_user.model.Point;
 import com.github.benmanes.caffeine.cache.Cache;
-import com.viancis.common.model.PointDTO;
-import com.viancis.common.repository.PointRepository;
+import com.viancis.common_point_user.model.PointDTO;
+import com.viancis.common_point_user.repository.PointRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import com.viancis.common.annotation.CacheService;
+import com.viancis.common_point_user.annotation.CacheService;
 
 @Service
 @AllArgsConstructor

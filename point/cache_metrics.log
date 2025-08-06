@@ -30,21 +30,201 @@ Evictions: 0
 ----------------------------
 ----------------------------
 Cache Metrics:
-Hits: 0
+Hits: 1
 Misses: 1
-Hit Rate: 0.0
-Miss Rate: 1.0
+Hit Rate: 0.5
+Miss Rate: 0.5
 Load Success: 0
 Load Failures: 0
 Evictions: 0
 ----------------------------
 ----------------------------
 Cache Metrics:
-Hits: 0
-Misses: 2
-Hit Rate: 0.0
-Miss Rate: 1.0
+Hits: 2
+Misses: 1
+Hit Rate: 0.6666666666666666
+Miss Rate: 0.3333333333333333
 Load Success: 0
 Load Failures: 0
 Evictions: 0
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 2
+Misses: 2
+Hit Rate: 0.5
+Miss Rate: 0.5
+Load Success: 0
+Load Failures: 0
+Evictions: 0
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 2
+Misses: 2
+Hit Rate: 0.5
+Miss Rate: 0.5
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 3
+Misses: 2
+Hit Rate: 0.6
+Miss Rate: 0.4
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 3
+Misses: 2
+Hit Rate: 0.6
+Miss Rate: 0.4
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 4
+Misses: 2
+Hit Rate: 0.6666666666666666
+Miss Rate: 0.3333333333333333
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 4
+Misses: 2
+Hit Rate: 0.6666666666666666
+Miss Rate: 0.3333333333333333
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 5
+Misses: 2
+Hit Rate: 0.7142857142857143
+Miss Rate: 0.2857142857142857
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 5
+Misses: 2
+Hit Rate: 0.7142857142857143
+Miss Rate: 0.2857142857142857
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 6
+Misses: 2
+Hit Rate: 0.75
+Miss Rate: 0.25
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 6
+Misses: 2
+Hit Rate: 0.75
+Miss Rate: 0.25
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 7
+Misses: 2
+Hit Rate: 0.7777777777777778
+Miss Rate: 0.2222222222222222
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 7
+Misses: 2
+Hit Rate: 0.7777777777777778
+Miss Rate: 0.2222222222222222
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 8
+Misses: 2
+Hit Rate: 0.8
+Miss Rate: 0.2
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 8
+Misses: 2
+Hit Rate: 0.8
+Miss Rate: 0.2
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 9
+Misses: 2
+Hit Rate: 0.8181818181818182
+Miss Rate: 0.18181818181818182
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 9
+Misses: 2
+Hit Rate: 0.8181818181818182
+Miss Rate: 0.18181818181818182
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 10
+Misses: 2
+Hit Rate: 0.8333333333333334
+Miss Rate: 0.16666666666666666
+Load Success: 0
+Load Failures: 0
+Evictions: 1
+----------------------------
+----------------------------
+Cache Metrics:
+Hits: 10
+Misses: 3
+Hit Rate: 0.7692307692307693
+Miss Rate: 0.23076923076923078
+Load Success: 0
+Load Failures: 0
+Evictions: 2
 ----------------------------

@@ -1,7 +1,7 @@
 package com.viancis.statistic.service;
 
 
-import com.viancis.common.dto.PointNotification;
+import com.viancis.common_point_user.dto.PointNotification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;

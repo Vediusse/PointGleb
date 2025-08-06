@@ -1,9 +1,9 @@
 package com.viancis.point.controller;
 
-import com.viancis.common.model.Point;
-import com.viancis.common.model.PointDTO;
-import com.viancis.common.model.PointRequest;
-import com.viancis.common.service.CustomUserDetails;
+import com.viancis.common_point_user.model.Point;
+import com.viancis.common_point_user.model.PointDTO;
+import com.viancis.common_point_user.model.PointRequest;
+import com.viancis.common_point_user.service.CustomUserDetails;
 import com.viancis.point.service.PointService;
 
 import jakarta.validation.Valid;

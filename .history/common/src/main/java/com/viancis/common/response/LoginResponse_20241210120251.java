@@ -1,4 +1,4 @@
-package com.viancis.common.response;
+package com.viancis.common_point_user.response;
 
 public class LoginResponse {
     private String token;
