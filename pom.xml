@@ -19,6 +19,8 @@
         <module>common_point_user</module>
         <module>common</module>
         <module>auth</module>
+        <module>oauth2</module>
+        <module>vielleicht</module>
         <module>eureka</module>
     </modules>
     <properties>
